@@ -14,9 +14,21 @@ Predicting whether pizza requests on Reddit will be successful.
    ```
 
 3. Run the model:
+
+   **Option A: Command Line**
    ```bash
    python pizza_prediction.py
    ```
+
+   **Option B: Interactive Dashboard**
+   ```bash
+   streamlit run app.py
+   ```
+   This live dashboard let you:
+   - Watch the model train in real-time
+   - Adjust parameters with sliders
+   - See interactive visualizations
+   - View feature importance, confusion matrix, ROC curve
 
 ## Model
 
