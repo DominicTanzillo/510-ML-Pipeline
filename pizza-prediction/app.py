@@ -268,12 +268,35 @@ else:
     st.subheader("📋 Sample Data Preview")
     st.dataframe(df[numeric_features + ['requester_received_pizza']].head(10), use_container_width=True)
 
-    # Show feature distributions
-    st.subheader("📊 Target Distribution")
-    fig_dist = px.pie(
+    # Show feature distributions - Pizza-themed pie chart!
+    st.subheader("🍕 Target Distribution")
+    fig_dist = go.Figure(data=[go.Pie(
+        labels=['No Pizza 😢', 'Pizza Received 🍕'],
         values=[len(y) - y.sum(), y.sum()],
-        names=['No Pizza', 'Pizza Received'],
-        title='Pizza Request Outcomes',
-        color_discrete_sequence=['#ff6b6b', '#51cf66']
+        hole=0.3,  # Donut chart like a pizza crust
+        marker=dict(
+            colors=['#8B4513', '#FFA500'],  # Brown crust, Orange cheese
+            line=dict(color='#D2691E', width=3)  # Pizza crust outline
+        ),
+        textfont=dict(size=16, color='white'),
+        pull=[0, 0.1]  # Pull out the "Pizza Received" slice
+    )])
+
+    fig_dist.update_layout(
+        title={
+            'text': '🍕 Pizza Request Outcomes 🍕',
+            'x': 0.5,
+            'xanchor': 'center',
+            'font': {'size': 20}
+        },
+        annotations=[
+            dict(
+                text=f'{y.sum()}<br>Pizzas!',
+                x=0.5, y=0.5,
+                font_size=20,
+                showarrow=False
+            )
+        ],
+        showlegend=True
     )
     st.plotly_chart(fig_dist, use_container_width=True)
